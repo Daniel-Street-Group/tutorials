@@ -1,7 +1,7 @@
 
 
 from odoo import api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class EstateProperty(models.Model):
@@ -28,6 +28,19 @@ class EstateProperty(models.Model):
     offer_ids = fields.One2many("estate.property.offer", "property_id")
     total_area = fields.Integer(string="Total Area (sqm)", compute="_compute_total_area")
     best_price = fields.Float(compute="_compute_best_price")
+
+    # Constraints
+    _sql_constraints = [
+        ('expected_price_constraint', 'CHECK(expected_price >= 0.0)', 'Expected price must be strictly positive'),
+        ('selling_price_constraint', 'CHECK(selling_price >= 0)', 'Selling price must be positive'),
+    ]
+
+    @api.constrains('selling_price')
+    def _check_selling_price(self):
+        for property in self: 
+            if property.selling_price < property.expected_price * 0.9:
+                raise ValidationError("Selling price must be at least 90% of the expected price")
+
 
     postcode = fields.Char()
     date_availability = fields.Date(copy=False, default=fields.Datetime.add(fields.Datetime.today(), months=3))
