@@ -22,6 +22,7 @@ class EstatePropertyLine(models.Model):
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Test Estate Property module"
+    _order = "id desc"
 
     name = fields.Char(required=True)
     active = fields.Boolean(default=True)
