@@ -38,12 +38,16 @@
                         <h1><field name="name"/></h1>
                     </div>
                     <group>
-                        <button name="action_set_sold" type="object" string="Sold"/>
-                        <button name="action_set_cancelled" type="object" string="Cancel"/>
+                        <group>
+                            <button name="action_set_sold" type="object" string="Sold"/>
+                            <button name="action_set_cancelled" type="object" string="Cancel"/>
+                        </group>
+                        <group>
+                            <field name="state" nolabel="1" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
+                        </group>
                     </group>
                     <group>
                         <group>
-                            <field name="state"/>
                             <field name="tag_ids" widget="many2many_tags"/>
                             <field name="property_type_id"/>
                             <field name="postcode"/>
