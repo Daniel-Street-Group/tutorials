@@ -3,6 +3,21 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
+class EstatePropertyLine(models.Model):
+    _name = "estate.property.line"
+    _description = "Estate Property Line"
+
+    # property_type_id = fields.Many2one("estate.property.type")
+    # title = fields.Char(required=True)
+    # expected_price = fields.Float(required=True)
+    # state = fields.Selection(
+    #     string="Status",
+    #     required=True,
+    #     copy=False,
+    #     default='new',
+    #     selection=[('new', 'New'), ('offer_received', 'Offer Received'), ('offer_accepted', 'Offer Accepted'), 
+    #                 ('sold', 'Sold'), ('cancelled', 'Cancelled')]
+    # )
 
 class EstateProperty(models.Model):
     _name = "estate.property"
